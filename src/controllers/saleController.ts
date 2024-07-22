@@ -5,7 +5,7 @@ import User from '../models/User';
 
 export const getSales = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const sales = await Sale.find().populate('product').populate('customer');
+    const sales = await Sale.find().populate('product').populate('user');
     return res.json(sales);
   } catch (error) {
     if (error instanceof Error) {

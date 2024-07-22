@@ -8,7 +8,7 @@ export interface IUser extends Document {
   phone: string;
   email: string;
   password: string;
-  isPermanentClient: boolean;
+  isPermanentCustomer: boolean;
   role: 'admin' | 'customer';
   matchPassword: (enteredPassword: string) => Promise<boolean>;
 }

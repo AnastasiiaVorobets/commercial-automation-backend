@@ -26,12 +26,14 @@ export const registerUser = async (req: Request, res: Response): Promise<Respons
     await user.save();
     return res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
+    console.error('Error in registerUser:', error);
     if (error instanceof Error) {
       return res.status(500).json({ message: 'Server Error', error: error.message });
     }
     return res.status(500).json({ message: 'Server Error', error: 'Unknown error' });
   }
 };
+
 
 export const loginUser = async (req: Request, res: Response): Promise<Response> => {
   const { email, password } = req.body;

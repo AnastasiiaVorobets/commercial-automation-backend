@@ -10,9 +10,10 @@ const UserSchema = new Schema<IUser>({
   phone: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  isPermanentClient: { type: Boolean, default: false },
+  isPermanentCustomer: { type: Boolean, default: false },
   role: { type: String, enum: ['admin', 'customer'], required: true },
 });
+
 
 UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
