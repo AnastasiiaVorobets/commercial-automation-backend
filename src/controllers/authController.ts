@@ -52,6 +52,7 @@ export const loginUser = async (req: Request, res: Response): Promise<Response> 
       user: {
         id: user.id,
         role: user.role,
+        isPermanentCustomer: user.isPermanentCustomer,
       },
     };
 
