@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import config from '../config/default';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 declare module 'express-serve-static-core' {
   interface Request {
@@ -16,7 +18,8 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   }
 
   try {
-    const decoded = jwt.verify(token, config.jwtSecret);
+    const jwtSecret = process.env.JWT_SECRET!;
+    const decoded = jwt.verify(token, jwtSecret);
     req.user = (decoded as any).user;
     next();
   } catch (err) {

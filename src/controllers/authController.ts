@@ -1,7 +1,11 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import User from '../models/User';
-import config from '../config/default';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const jwtSecret = process.env.JWT_SECRET || '';
 
 export const registerUser = async (req: Request, res: Response): Promise<Response> => {
   const { firstName, lastName, middleName, address, phone, email, password, role, isPermanentCustomer } = req.body;
@@ -59,7 +63,7 @@ export const loginUser = async (req: Request, res: Response): Promise<Response> 
     return new Promise<Response>((resolve, reject) => {
       jwt.sign(
         payload,
-        config.jwtSecret,
+        jwtSecret,
         { expiresIn: '1h' },
         (err, token) => {
           if (err) {
